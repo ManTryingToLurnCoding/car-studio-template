@@ -145,6 +145,31 @@ fieldset { border: 0; display: grid; gap: 12px; }
 .choices input:checked + span { background: var(--accent); color: #fff; border-color: var(--accent); }
 .choices input:focus-visible + span { outline: 2px solid var(--text); outline-offset: 2px; }
 
+/* Multi-step quote form */
+.quote-form { align-content: start; }
+.progress-row, .step, .form-error, .form-nav { grid-column: 1 / -1; }
+.progress-row { display: grid; gap: 8px; }
+.step-count { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+progress { width: 100%; height: 3px; border: 0; appearance: none; background: var(--line); }
+progress::-webkit-progress-bar { background: var(--line); }
+progress::-webkit-progress-value { background: var(--accent-hot); }
+progress::-moz-progress-bar { background: var(--accent-hot); }
+.step { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; min-height: 250px; align-content: start; }
+.step[hidden], .form-done[hidden], .quote-form[hidden], .form-nav [hidden] { display: none; }
+.step > h3 { grid-column: 1 / -1; font-size: clamp(24px, 2.4vw, 34px); font-weight: 400; outline: none; }
+fieldset.field { min-width: 0; }
+.choices span { min-height: 44px; display: inline-flex; align-items: center; }
+.consent { display: flex; gap: 10px; align-items: flex-start; text-transform: none; letter-spacing: 0; font-size: 13px; line-height: 1.45; }
+.consent input { width: 20px; height: 20px; flex: none; accent-color: var(--accent); }
+.trap { position: absolute; left: -9999px; }
+.form-error { color: #ff6a60; font-size: 14px; }
+.form-error:empty { display: none; }
+.form-nav { display: flex; justify-content: space-between; gap: 12px; }
+.form-nav [data-next] { margin-left: auto; }
+.form-nav .btn { min-height: 48px; justify-content: center; }
+.form-done { align-content: center; grid-template-columns: 1fr; min-height: 420px; }
+.form-done h3 { outline: none; }
+
 /* FAQ with big numerals */
 .faq { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; }
 .faq details { border-top: 1px solid var(--line); }
@@ -209,6 +234,9 @@ fieldset { border: 0; display: grid; gap: 12px; }
   .offers .tile { min-height: 400px; }
   .offers .tile + .tile { border-left: 0; border-top: 1px solid var(--line); }
   .prices, .form { grid-template-columns: 1fr; }
+  .step { grid-template-columns: 1fr; min-height: 0; }
+  .form-nav .btn { flex: 1; }
+  input[type=text], input[type=email], input[type=tel] { font-size: 16px; }
   .cards { grid-template-columns: 1fr 1fr; }
   .card { aspect-ratio: 1; padding: 14px; }
   .card .h3 { font-size: 17px; }

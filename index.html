@@ -135,35 +135,71 @@
     <div class="tile quote-panel">
       <img src="img/custom.webp" alt="Hand-painted copper custom car with fine pinstriping" loading="lazy">
       <h2 class="h2">Get your quote<br>within 24 hours.</h2>
-      <p>Tell us about your car and budget. Fixed price, no obligation.</p>
+      <p>Four quick steps. Fixed price, no obligation.</p>
     </div>
-    <!-- shortcut: no backend; point action to Formspree/Netlify Forms/your API before going live -->
-    <form class="form" action="#" method="post">
-      <div class="field"><label for="name">Full name *</label><input type="text" id="name" name="name" required autocomplete="name"></div>
-      <div class="field"><label for="phone">Phone *</label><input type="tel" id="phone" name="phone" required autocomplete="tel"></div>
-      <div class="field"><label for="email">Email *</label><input type="email" id="email" name="email" required autocomplete="email"></div>
-      <div class="field"><label for="car">Car (make &amp; model) *</label><input type="text" id="car" name="car" required placeholder="e.g. Porsche 911 GT3"></div>
-      <fieldset class="field full">
-        <legend>Your project</legend>
-        <div class="choices">
-          <label><input type="checkbox" name="project" value="wrap"><span>Color wrap</span></label>
-          <label><input type="checkbox" name="project" value="ppf"><span>Paint protection film</span></label>
-          <label><input type="checkbox" name="project" value="ceramic"><span>Ceramic coating</span></label>
-          <label><input type="checkbox" name="project" value="tint"><span>Window tint</span></label>
-          <label><input type="checkbox" name="project" value="wheels-kit"><span>Wheels / body kit</span></label>
-        </div>
-      </fieldset>
-      <fieldset class="field full">
-        <legend>Your budget *</legend>
-        <div class="choices">
-          <label><input type="radio" name="budget" value="1500-3000" required><span>$1,500 – $3,000</span></label>
-          <label><input type="radio" name="budget" value="3000-5000"><span>$3,000 – $5,000</span></label>
-          <label><input type="radio" name="budget" value="5000-7000"><span>$5,000 – $7,000</span></label>
-          <label><input type="radio" name="budget" value="10000+"><span>$10,000+</span></label>
-        </div>
-      </fieldset>
-      <div class="field full"><button class="btn arrow" type="submit">Send my request</button></div>
+    <noscript><style>.quote-form { display: none; }</style><p class="pad">Please call <a href="tel:+14805550142">(480) 555-0142</a> for a quote.</p></noscript>
+    <!-- Paste the Make.com webhook URL into data-webhook to send leads to the CRM -->
+    <form class="form quote-form" id="quote-form" data-webhook="">
+      <div class="progress-row"><p class="step-count" aria-live="polite">Step 1 of 4</p><progress max="4" value="1" aria-label="Quote form progress"></progress></div>
+
+      <div class="step">
+        <h3 class="h3" tabindex="-1">Which car is it?</h3>
+        <div class="field full"><label for="car">Year, make and model *</label><input type="text" id="car" name="car" required maxlength="80" autocomplete="off" placeholder="e.g. 2024 Porsche 911"></div>
+      </div>
+
+      <div class="step" hidden>
+        <h3 class="h3" tabindex="-1">What would you like done?</h3>
+        <fieldset class="field full">
+          <legend>Choose one or more *</legend>
+          <div class="choices">
+            <label><input type="checkbox" name="service" value="Full-body PPF"><span>Full-body PPF</span></label>
+            <label><input type="checkbox" name="service" value="Full front PPF"><span>Full front PPF</span></label>
+            <label><input type="checkbox" name="service" value="Color change wrap"><span>Color change wrap</span></label>
+            <label><input type="checkbox" name="service" value="Ceramic coating"><span>Ceramic coating</span></label>
+            <label><input type="checkbox" name="service" value="Window tint"><span>Window tint</span></label>
+            <label><input type="checkbox" name="service" value="Chrome delete"><span>Chrome delete</span></label>
+            <label><input type="checkbox" name="service" value="Wheels or body kit"><span>Wheels or body kit</span></label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="step" hidden>
+        <h3 class="h3" tabindex="-1">Budget and timing</h3>
+        <fieldset class="field full">
+          <legend>Your budget *</legend>
+          <div class="choices">
+            <label><input type="radio" name="budget" value="Under $1,000" required><span>Under $1,000</span></label>
+            <label><input type="radio" name="budget" value="$1,000-$3,000"><span>$1,000 – $3,000</span></label>
+            <label><input type="radio" name="budget" value="$3,000-$6,000"><span>$3,000 – $6,000</span></label>
+            <label><input type="radio" name="budget" value="$6,000+"><span>$6,000+</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="field full">
+          <legend>Preferred time</legend>
+          <div class="choices">
+            <label><input type="radio" name="preferred_time" value="Flexible" checked><span>I'm flexible</span></label>
+            <label><input type="radio" name="preferred_time" value="Weekday morning"><span>Weekday morning</span></label>
+            <label><input type="radio" name="preferred_time" value="Weekday afternoon"><span>Weekday afternoon</span></label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="step" hidden>
+        <h3 class="h3" tabindex="-1">Where should we send your quote?</h3>
+        <div class="field"><label for="name">Full name *</label><input type="text" id="name" name="name" required maxlength="80" autocomplete="name"></div>
+        <div class="field"><label for="phone">Phone *</label><input type="tel" id="phone" name="phone" required pattern="[0-9+\(\) .\-]{7,20}" title="Enter a valid phone number" autocomplete="tel"></div>
+        <div class="field full"><label for="email">Email (optional)</label><input type="email" id="email" name="email" maxlength="120" autocomplete="email"></div>
+        <label class="consent field full"><input type="checkbox" name="sms_consent" value="yes"><span>Text me about this quote. Message and data rates may apply. Reply STOP to opt out.</span></label>
+        <div class="trap" aria-hidden="true"><label>Company<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
+      </div>
+
+      <p class="form-error" role="alert"></p>
+      <div class="form-nav">
+        <button class="btn ghost" type="button" data-back hidden>Back</button>
+        <button class="btn" type="submit" data-next>Continue</button>
+      </div>
     </form>
+    <div class="form form-done" id="quote-done" hidden><h3 class="h2" tabindex="-1"></h3><p class="muted"></p></div>
   </section>
 
   <section class="pad" id="faq">
@@ -198,5 +234,6 @@
 
 <div class="callbar"><a href="tel:+14805550142">Call</a><a href="#quote">Get a quote</a></div>
 
+<script src="quote.js" defer></script>
 </body>
 </html>
