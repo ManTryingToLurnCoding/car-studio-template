@@ -34,13 +34,6 @@ Prices, gallery and FAQ live on each service page, not the home page.
 
 ## Images
 
-### Still to supply
-| Code | What | Size |
-|---|---|---|
-| L1–L6 | Partner / film brand logos, white versions (SVG or PNG) | ~300×140 |
-
-To fill a slot, replace its `<div class="ph">…</div>` with an `<img>`.
-
 ### In use
 These are demo images. Replace them with the client's own work before launch, so the site never presents stock photos as real projects.
 
@@ -59,10 +52,13 @@ These are demo images. Replace them with the client's own work before launch, so
 | `film` | Gallery | Clarity Coat / Unsplash |
 | `detail` | Gallery | Vadym Lebedych / Unsplash |
 
+Logo carousel: 14 monochrome PNGs in `img/logos/`, converted from [Simple Icons](https://simpleicons.org) (CC0). The trademarks still belong to their owners.
+
 ## Before going live
 - The quote form has no backend. Set its `action` to Formspree, Netlify Forms or your own endpoint.
 - **Demo identity:** Fil Rouge Atelier ("red thread") is fictional. The phone uses a French range reserved for fiction and the email uses the reserved `.example` domain. Replace the name, phone, email, address, prices, stats and testimonials.
 - **Map:** in `index.html`, change `Gerland, 69007 Lyon` in the iframe `src` and the "Open in Google Maps" link (URL-encoded). No API key needed.
 - **EU sites:** the Google Maps embed loads content from Google, so check whether it must wait behind cookie consent.
 - Replace the demo photos with the client's own.
+- **Logos are demo-only.** Before launch, keep only makes the client has really worked on and brands they really partner with or have permission to show.
 - The hero shows hand-stitched leather. If the studio doesn't do upholstery, add it as a service or swap the hero.
