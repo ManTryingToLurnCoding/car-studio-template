@@ -172,7 +172,9 @@ fieldset { border: 0; display: grid; gap: 12px; }
 
 /* Contact + map */
 .contact { display: grid; grid-template-columns: 1.1fr 1fr; }
-.contact > .ph { min-height: 420px; border-right: 1px solid var(--line); }
+/* Keyless embed can't take a map style, so a filter turns it dark to match the palette */
+.contact > iframe { display: block; width: 100%; height: 100%; min-height: 420px; border: 0; border-right: 1px solid var(--line); filter: invert(.92) hue-rotate(180deg) sepia(.28) saturate(.75) brightness(.92); }
+.maplink { color: #ff6a60; }
 .contact-info > div { padding: 24px var(--pad); border-bottom: 1px solid var(--line); }
 .contact-info > div:last-child { border-bottom: 0; }
 .kv { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 14px; }
@@ -203,7 +205,7 @@ fieldset { border: 0; display: grid; gap: 12px; }
   .logos { grid-template-columns: repeat(3, 1fr); }
   .gallery { grid-template-columns: repeat(2, 1fr); }
   .quote-panel { min-height: 300px; }
-  .contact > .ph { min-height: 260px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .contact > iframe { height: 320px; min-height: 320px; border-right: 0; border-bottom: 1px solid var(--line); }
 }
 @media (max-width: 640px) {
   body { padding-bottom: 60px; }

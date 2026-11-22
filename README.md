@@ -38,9 +38,8 @@ Prices, gallery and FAQ live on each service page, not the home page.
 | Code | What | Size |
 |---|---|---|
 | L1–L6 | Partner / film brand logos, white versions (SVG or PNG) | ~300×140 |
-| M1 | Map: Google Maps embed (dark style) or static screenshot | 1400×1000 |
 
-To fill a slot, replace its `<div class="ph">…</div>` with an `<img>` or map `<iframe>`.
+To fill a slot, replace its `<div class="ph">…</div>` with an `<img>`.
 
 ### In use
 These are demo images. Replace them with the client's own work before launch, so the site never presents stock photos as real projects.
@@ -62,6 +61,8 @@ These are demo images. Replace them with the client's own work before launch, so
 
 ## Before going live
 - The quote form has no backend. Set its `action` to Formspree, Netlify Forms or your own endpoint.
-- Replace `BRAND`, phone numbers, addresses, prices, stats and testimonials.
+- **Demo identity:** Fil Rouge Atelier ("red thread") is fictional. The phone uses a French range reserved for fiction and the email uses the reserved `.example` domain. Replace the name, phone, email, address, prices, stats and testimonials.
+- **Map:** in `index.html`, change `Gerland, 69007 Lyon` in the iframe `src` and the "Open in Google Maps" link (URL-encoded). No API key needed.
+- **EU sites:** the Google Maps embed loads content from Google, so check whether it must wait behind cookie consent.
 - Replace the demo photos with the client's own.
 - The hero shows hand-stitched leather. If the studio doesn't do upholstery, add it as a service or swap the hero.
