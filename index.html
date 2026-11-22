@@ -8,13 +8,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="img/hero.webp">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- HEADER: 4 items max + one CTA + click-to-call (from Art Motors) / white boxed CTA (from ref) -->
 <header class="header">
-  <div class="frame">
+  <div class="bar">
     <a href="index.html" class="logo" aria-label="Home">BRAND</a>
     <nav class="nav" aria-label="Main">
       <details class="dropdown">
@@ -50,17 +51,15 @@
   </div>
 </header>
 
-<main class="frame">
+<main>
 
   <!-- 1. HERO: one promise + proof (Art Motors) in the ref's layout -->
   <section class="hero">
-    <div class="ph" role="img" aria-label="Hero image placeholder">
-      <div><strong>[H1] Hero car photo</strong>Flagship car, 3/4 rear view, dark studio, low key light<br><em>Landscape 2400×1050 · or a 10s silent MP4 loop</em></div>
-    </div>
+    <img src="img/hero.webp" width="1916" height="821" fetchpriority="high" alt="Hands stitching red thread into black perforated leather">
     <div class="hero-text">
       <h1 class="display">Protected. Personal.<br>Unmistakable.</h1>
       <div>
-        <p class="lead"><b>Wrapping, paint protection and detailing for cars that deserve it.</b> <span>A fixed quote in 24 hours.</span></p>
+        <p class="lead"><b>Wrapping, paint protection and detailing, finished by hand.</b> <span>A fixed quote in 24 hours.</span></p>
         <div class="hero-meta"><span>10+ years · 1,200 cars</span><b>Up to 10-yr warranty</b></div>
       </div>
     </div>
@@ -75,39 +74,35 @@
 
   <!-- 2. TWO OFFERS side by side (Art Motors' 2 banners, merged into one row) -->
   <section class="offers">
-    <article>
-      <div class="ph" role="img" aria-label="Image placeholder"><div><strong>[O1] PPF in action</strong>Installer squeegeeing clear film on a bonnet<br><em>1400×900</em></div></div>
-      <div class="copy">
-        <p class="eyebrow">Paint protection film</p>
-        <h2 class="h2 caps">Protect your investment</h2>
-        <p class="muted">Invisible, self-healing film. 10-year warranty.</p>
-        <div><a href="#quote" class="btn arrow">Get a quote</a></div>
-      </div>
+    <article class="tile">
+      <img src="img/ppf-install.webp" alt="Gloved hands applying clear protection film to a glossy panel" loading="lazy">
+      <p class="eyebrow">Paint protection film</p>
+      <h2 class="h2 caps">Protect your investment</h2>
+      <p class="muted">Invisible, self-healing film. 10-year warranty.</p>
+      <a href="#quote" class="btn arrow">Get a quote</a>
     </article>
-    <article>
-      <div class="ph" role="img" aria-label="Image placeholder"><div><strong>[O2] Bold wrap result</strong>Supercar in a striking wrap colour, side profile<br><em>1400×900</em></div></div>
-      <div class="copy">
-        <p class="eyebrow">Colour wrap</p>
-        <h2 class="h2 caps">Make it yours</h2>
-        <p class="muted">200+ finishes, fully reversible, 4–7 days.</p>
-        <div><a href="#quote" class="btn arrow">Get a quote</a></div>
-      </div>
+    <article class="tile">
+      <img src="img/wrap-light.webp" alt="Sports car with a red wheel under dramatic red light" loading="lazy">
+      <p class="eyebrow">Colour wrap</p>
+      <h2 class="h2 caps">Make it yours</h2>
+      <p class="muted">200+ finishes, fully reversible, 4–7 days.</p>
+      <a href="#quote" class="btn arrow">Get a quote</a>
     </article>
   </section>
 
   <!-- 3. SERVICES GRID (Art Motors "Nos services"): prices, gallery & FAQ live on each service page -->
-  <section class="pad" id="services">
-    <div class="head">
+  <section id="services">
+    <div class="head inset">
       <h2 class="h2">Everything your car needs.</h2>
-      <p class="muted">Prices, details and real photos on each service page.</p>
+      <p class="muted">Prices and details on each service page.</p>
     </div>
     <div class="cards">
-      <a class="card" href="service.html"><div class="ph"><div><strong>[S1] Wrap</strong>Freshly wrapped car<br><em>1200×750</em></div></div><h3 class="h3">Colour wrap</h3><span class="more">From 4,300 € &rarr;</span></a>
-      <a class="card" href="service.html"><div class="ph"><div><strong>[S2] PPF</strong>Water beading on paint<br><em>1200×750</em></div></div><h3 class="h3">Paint protection film</h3><span class="more">From 2,490 € &rarr;</span></a>
-      <a class="card" href="service.html"><div class="ph"><div><strong>[S3] Ceramic</strong>Mirror-gloss reflection<br><em>1200×750</em></div></div><h3 class="h3">Ceramic coating</h3><span class="more">From 690 € &rarr;</span></a>
-      <a class="card" href="service.html"><div class="ph"><div><strong>[S4] Tint</strong>Dark rear windows<br><em>1200×750</em></div></div><h3 class="h3">Window tint</h3><span class="more">From 290 € &rarr;</span></a>
-      <a class="card" href="service.html"><div class="ph"><div><strong>[S5] Wheels</strong>Forged wheel close-up<br><em>1200×750</em></div></div><h3 class="h3">Wheels &amp; tyres</h3><span class="more">On quote &rarr;</span></a>
-      <a class="card" href="service.html"><div class="ph"><div><strong>[S6] Body kit</strong>Carbon diffuser + exhaust<br><em>1200×750</em></div></div><h3 class="h3">Body kits &amp; exhaust</h3><span class="more">On quote &rarr;</span></a>
+      <a class="card tile" href="service.html"><img src="img/wrap-gloss.webp" alt="Glossy red wrapped car panel" loading="lazy"><h3 class="h3">Colour wrap</h3><span class="more">From 4,300 € &rarr;</span></a>
+      <a class="card tile" href="service.html"><img src="img/ppf-lines.webp" alt="Sculpted red bodywork with a mirror finish" loading="lazy"><h3 class="h3">Paint protection film</h3><span class="more">From 2,490 € &rarr;</span></a>
+      <a class="card tile" href="service.html"><img src="img/ceramic.webp" alt="Detailer polishing a black car to a mirror finish" loading="lazy"><h3 class="h3">Ceramic coating</h3><span class="more">From 690 € &rarr;</span></a>
+      <a class="card tile" href="service.html"><img src="img/tint.webp" alt="Black car with dark side glass and alloy wheel" loading="lazy"><h3 class="h3">Window tint</h3><span class="more">From 290 € &rarr;</span></a>
+      <a class="card tile" href="service.html"><img src="img/wheel.webp" alt="Close-up of a red-accented alloy wheel" loading="lazy"><h3 class="h3">Wheels &amp; tyres</h3><span class="more">On quote &rarr;</span></a>
+      <a class="card tile" href="service.html"><img src="img/bodykit.webp" alt="Front grille and sculpted bodywork in deep blue and red" loading="lazy"><h3 class="h3">Body kits &amp; exhaust</h3><span class="more">On quote &rarr;</span></a>
     </div>
   </section>
 
@@ -129,10 +124,11 @@
   </section>
 
   <!-- 5. QUOTE FORM with budget question (Art Motors): the conversion point -->
-  <section class="pad" id="quote">
-    <div class="head">
-      <h2 class="h2">Get your quote<br><span class="muted">within 24 hours.</span></h2>
-      <p class="muted">Tell us about your car and budget. Fixed price, no obligation.</p>
+  <section class="quote-wrap" id="quote">
+    <div class="tile quote-panel">
+      <img src="img/custom.webp" alt="Hand-painted copper custom car with fine pinstriping" loading="lazy">
+      <h2 class="h2">Get your quote<br>within 24 hours.</h2>
+      <p>Tell us about your car and budget. Fixed price, no obligation.</p>
     </div>
     <!-- shortcut: no backend; point action to Formspree/Netlify Forms/your API before going live -->
     <form class="form" action="#" method="post">
@@ -175,7 +171,7 @@
 </main>
 
 <!-- FOOTER: big closing line (ref) -->
-<footer class="footer frame">
+<footer class="footer">
   <section class="pad"><p class="big">Let's make it<br>happen together</p></section>
   <div class="footer-row">
     <span>&copy; 2026 Brand Studio</span>

@@ -14,7 +14,7 @@
 <!-- SERVICE PAGE TEMPLATE: duplicate once per service, swap copy + [P*] images -->
 
 <header class="header">
-  <div class="frame">
+  <div class="bar">
     <a href="index.html" class="logo" aria-label="Home">BRAND</a>
     <nav class="nav" aria-label="Main">
       <details class="dropdown">
@@ -28,7 +28,7 @@
           <a href="service.html">Body kits</a>
         </div>
       </details>
-      <a href="index.html#work">Our work</a>
+      <a href="#work">Our work</a>
       <a href="#prices">Prices</a>
       <a href="#faq">FAQ</a>
       <a href="index.html#contact">Contact</a>
@@ -50,13 +50,11 @@
   </div>
 </header>
 
-<main class="frame">
+<main>
 
   <!-- 1. HERO: uppercase service name + one-line promise -->
-  <section class="hero">
-    <div class="ph" role="img" aria-label="Hero image placeholder">
-      <div><strong>[P1] Service hero</strong>The service at its best (here: glossy car, clear film catching the light)<br><em>Landscape 2400×1200</em></div>
-    </div>
+  <section class="hero short">
+    <img src="img/ppf-install.webp" fetchpriority="high" alt="Gloved hands applying clear protection film to a glossy panel">
     <div class="hero-text">
       <div><p class="eyebrow">Service</p><h1 class="display caps" style="margin-top:16px">Paint protection film</h1></div>
       <div>
@@ -78,7 +76,7 @@
         <li><b>Resale value</b>: factory paint stays perfect underneath.</li>
       </ul>
     </div>
-    <div class="ph" role="img" aria-label="Image placeholder"><div><strong>[P2] Benefit close-up</strong>Macro of the product working (here: scratch healing / water beading)<br><em>Portrait 1200×1400</em></div></div>
+    <img src="img/ppf-lines.webp" alt="Sculpted red bodywork with a mirror finish" loading="lazy">
   </section>
 
   <!-- 3. PRICES: 3 tiers by vehicle size -->
@@ -95,15 +93,15 @@
   </section>
 
   <!-- 4. GALLERY: real work for THIS service only -->
-  <section class="pad" id="work">
-    <div class="head"><h2 class="h2">Our work.</h2><p class="muted">Real cars, photographed in our workshop.</p></div>
+  <section id="work">
+    <div class="head inset"><h2 class="h2">Our work.</h2><p class="muted">Gloss, depth and detail, up close.</p></div>
     <div class="gallery">
-      <div class="ph wide"><div><strong>[P3] Best result</strong>Wide shot of a finished car<br><em>1600×800</em></div></div>
-      <div class="ph"><div><strong>[P4]</strong>Detail / edge finish<br><em>1000×1000</em></div></div>
-      <div class="ph"><div><strong>[P5]</strong>During installation<br><em>1000×1000</em></div></div>
-      <div class="ph"><div><strong>[P6]</strong>Finished car, different model<br><em>1000×1000</em></div></div>
-      <div class="ph"><div><strong>[P7]</strong>Before / after<br><em>1000×1000</em></div></div>
-      <div class="ph wide"><div><strong>[P8] Handover</strong>Client receiving the car<br><em>1600×800</em></div></div>
+      <img class="wide" src="img/wrap-light.webp" alt="Sports car under dramatic red light" loading="lazy">
+      <img src="img/detail.webp" alt="Polished black car headlights" loading="lazy">
+      <img src="img/film.webp" alt="Film being applied to a blue panel" loading="lazy">
+      <img src="img/tint.webp" alt="Black car side profile with alloy wheel" loading="lazy">
+      <img src="img/wheel.webp" alt="Red-accented alloy wheel" loading="lazy">
+      <img class="wide" src="img/custom.webp" alt="Copper custom car with fine pinstriping" loading="lazy">
     </div>
   </section>
 
@@ -127,7 +125,7 @@
   </section>
 </main>
 
-<footer class="footer frame">
+<footer class="footer">
   <section class="pad"><p class="big">Let's make it<br>happen together</p></section>
   <div class="footer-row">
     <span>&copy; 2026 Brand Studio</span>
