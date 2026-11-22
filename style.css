@@ -14,7 +14,7 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+html { scroll-behavior: smooth; scroll-padding-top: 104px; }
 body { background: var(--bg); color: var(--text); font: 300 16px/1.6 var(--font); -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
 img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -121,16 +121,6 @@ a.tile:hover > img { transform: scale(1.04); }
 .quote { padding: 24px; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; font-size: 15px; color: var(--muted); }
 .mosaic .title { grid-column: span 2; display: flex; align-items: center; padding: 24px var(--pad); }
 
-.logos { padding: 18px 0 24px; border-top: 1px solid var(--line); text-align: center; }
-.marquee { margin-top: 16px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-.track { display: flex; width: max-content; animation: marquee 42s linear infinite; }
-.marquee:hover .track { animation-play-state: paused; }
-.logo-set { display: flex; align-items: center; justify-content: space-around; flex: none; min-width: 100vw; gap: clamp(40px, 5vw, 80px); padding-right: clamp(40px, 5vw, 80px); }
-.logo-set img { flex: none; width: auto; height: 46px; max-width: 150px; object-fit: contain; opacity: .78; transition: opacity .2s; }
-.logo-set img:hover { opacity: 1; }
-@keyframes marquee { to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) { .track { animation: none; } .marquee { overflow-x: auto; } }
-
 /* Gallery: edge to edge, no gaps */
 .gallery { display: grid; grid-template-columns: repeat(4, 1fr); }
 .gallery img { aspect-ratio: 1; }
@@ -182,6 +172,10 @@ fieldset { border: 0; display: grid; gap: 12px; }
 .footer .big { font-size: clamp(40px, 9vw, 168px); font-weight: 500; line-height: .95; text-transform: uppercase; }
 .footer-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; padding: 24px var(--pad); border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
 .footer-row nav { display: flex; flex-wrap: wrap; gap: 24px; }
+
+.demo-note { padding: 4px var(--pad); background: var(--panel-2); color: #d8cabf; font-size: 12px; text-align: center; }
+.quick-answer { display: grid; gap: 12px; }
+.quick-answer .lead { max-width: 900px; }
 
 .callbar { display: none; }
 
