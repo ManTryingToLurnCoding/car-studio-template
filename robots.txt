@@ -1,0 +1,5 @@
+# Search and AI crawlers are allowed. Pages stay out of results through their noindex tag while this is a demo.
+User-agent: *
+Allow: /
+
+Sitemap: https://filrouge.example/sitemap.xml
