@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://filrouge.example/sitemap.xml
+Sitemap: https://fil-rouge-atelier.vercel.app/sitemap.xml

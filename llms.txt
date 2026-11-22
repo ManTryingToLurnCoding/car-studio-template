@@ -4,9 +4,9 @@
 
 ## Services
 
-- [Color change wrap](https://filrouge.example/color-wrap.html): from $3,200, usually 3–4 days. Chrome delete from $450.
-- [Paint protection film](https://filrouge.example/paint-protection-film.html): full front from $1,800, full body from $6,000.
-- [Ceramic coating](https://filrouge.example/ceramic-coating.html): $900 to $1,800, usually 1 day.
-- [Ceramic window tint](https://filrouge.example/window-tint.html): $350 to $700, usually 1 day.
-- [Wheels and tires](https://filrouge.example/wheels.html): priced by quote.
-- [Body kits and exhaust](https://filrouge.example/body-kits.html): priced by quote.
+- [Color change wrap](https://fil-rouge-atelier.vercel.app/color-wrap.html): from $3,200, usually 3–4 days. Chrome delete from $450.
+- [Paint protection film](https://fil-rouge-atelier.vercel.app/paint-protection-film.html): full front from $1,800, full body from $6,000.
+- [Ceramic coating](https://fil-rouge-atelier.vercel.app/ceramic-coating.html): $900 to $1,800, usually 1 day.
+- [Ceramic window tint](https://fil-rouge-atelier.vercel.app/window-tint.html): $350 to $700, usually 1 day.
+- [Wheels and tires](https://fil-rouge-atelier.vercel.app/wheels.html): priced by quote.
+- [Body kits and exhaust](https://fil-rouge-atelier.vercel.app/body-kits.html): priced by quote.

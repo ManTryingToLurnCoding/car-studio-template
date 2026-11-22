@@ -28,7 +28,7 @@ Leads are sent as form fields: `car`, `service`, `budget`, `preferred_time`, `na
 
 ## After deploying
 
-Replace every `https://filrouge.example` with the real site URL. This makes canonical links, social previews, the sitemap and `llms.txt` correct.
+Replace every `https://fil-rouge-atelier.vercel.app` with the real site URL. This makes canonical links, social previews, the sitemap and `llms.txt` correct.
 
 ## Before using this for a real client
 

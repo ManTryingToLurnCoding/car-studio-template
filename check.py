@@ -5,7 +5,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).parent
-SITE = "https://filrouge.example/"
+SITE = "https://fil-rouge-atelier.vercel.app/"
 
 
 class Page(HTMLParser):
