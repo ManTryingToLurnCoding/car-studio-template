@@ -57,13 +57,19 @@ async function startCall() {
         voiceSms.hidden = false;
       },
       onError: () => { voiceError.textContent = "The call had a problem. Please try again."; },
-      onDisconnect: () => { ended = true; showIdle("Call ended"); },
+      onDisconnect: () => {
+        ended = true;
+        showIdle("Call ended");
+        setTimeout(() => { if (statusLine.textContent === "Call ended") statusLine.textContent = ""; }, 4000);
+      },
     });
     if (ended) session = null; // the call can drop before startSession returns
     else showLive();
   } catch (err) {
     showIdle();
-    voiceError.textContent = err.name === "NotAllowedError" ? "Microphone access is needed for the call." : "The call couldn't start. Please try again.";
+    voiceError.textContent = err.name === "NotAllowedError" ? "Microphone access is needed for the call."
+      : err.closeCode === 4300 ? "The receptionist has reached today's call limit. Please try again tomorrow."
+      : "The call couldn't start. Please try again.";
   }
 }
 
@@ -72,4 +78,5 @@ callButton.addEventListener("click", () => {
   callButton.disabled = true;
   session.endSession();
 });
+document.querySelector("#voice-sms-close")?.addEventListener("click", () => { voiceSms.hidden = true; });
 addEventListener("pagehide", () => session?.endSession());

@@ -214,6 +214,21 @@ fieldset.field { min-width: 0; }
 .voice-demo .btn:disabled { opacity: .65; cursor: wait; }
 .voice-demo #voice-status:empty, .voice-demo #voice-error:empty { display: none; }
 .voice-note { max-width: 560px; font-size: 13px; }
+.voice-dock { position: fixed; right: 24px; bottom: 92px; z-index: 40; display: grid; justify-items: end; gap: 10px; width: min(320px, calc(100vw - 32px)); pointer-events: none; }
+.voice-dock > * { pointer-events: auto; }
+.voice-dock .btn { min-width: 64px; height: 64px; padding: 0; justify-content: center; gap: 0; border-radius: 999px; font-size: 0; box-shadow: 0 8px 24px rgba(0, 0, 0, .45); }
+.voice-dock .btn:hover, .voice-dock .btn:focus-visible, .voice-dock .btn.ghost, .voice-dock .btn:disabled { padding: 0 22px; gap: 10px; font-size: 14px; }
+.voice-dock .btn::before { content: ""; flex: none; width: 22px; height: 22px; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 15a3.5 3.5 0 0 0 3.5-3.5v-6a3.5 3.5 0 0 0-7 0v6A3.5 3.5 0 0 0 12 15Zm6-3.5a6 6 0 0 1-12 0H4a8 8 0 0 0 7 7.9V22h2v-2.6a8 8 0 0 0 7-7.9h-2Z'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 15a3.5 3.5 0 0 0 3.5-3.5v-6a3.5 3.5 0 0 0-7 0v6A3.5 3.5 0 0 0 12 15Zm6-3.5a6 6 0 0 1-12 0H4a8 8 0 0 0 7 7.9V22h2v-2.6a8 8 0 0 0 7-7.9h-2Z'/%3E%3C/svg%3E") center / contain no-repeat; }
+.voice-dock .btn.ghost { background: var(--bg); }
+.voice-dock .btn:disabled { opacity: .8; cursor: wait; }
+.voice-dock-panel { display: grid; gap: 8px; width: 100%; padding: 14px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); box-shadow: 0 8px 24px rgba(0, 0, 0, .45); }
+.voice-dock-panel:not(:has(#voice-status:not(:empty), #voice-error:not(:empty), #voice-sms:not([hidden]))) { display: none; }
+.voice-dock #voice-status:empty, .voice-dock .voice-note { display: none; }
+.voice-dock:has(#voice-call:disabled) .voice-note { display: block; }
+.voice-dock .sms-phone { position: relative; width: 100%; }
+.voice-sms-close { position: absolute; top: 6px; right: 8px; width: 32px; height: 32px; border: 0; background: none; color: var(--text); font-size: 20px; cursor: pointer; }
+@media (min-width: 641px) { .hero-meta { padding-right: 80px; } }
+@media (max-width: 640px) { .voice-dock { right: 16px; bottom: 148px; } }
 .quick-answer { display: grid; gap: 12px; }
 .quick-answer .lead { max-width: 900px; }
 
