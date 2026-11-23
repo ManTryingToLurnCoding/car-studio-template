@@ -169,6 +169,9 @@ fieldset.field { min-width: 0; }
 .form-nav .btn { min-height: 48px; justify-content: center; }
 .form-done { align-content: center; grid-template-columns: 1fr; min-height: 420px; }
 .form-done h3 { outline: none; }
+.sms-phone { width: min(100%, 340px); display: grid; gap: 12px; padding: 18px; border: 1px solid #4a372b; border-radius: 28px; background: var(--panel); }
+.sms-phone[hidden] { display: none; }
+.sms-bubble { padding: 12px 14px; border-radius: 16px 16px 16px 4px; background: var(--panel-2); font-size: 15px; line-height: 1.45; overflow-wrap: anywhere; }
 
 /* FAQ with big numerals */
 .faq { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; }

@@ -55,9 +55,17 @@ async function send() {
   next.disabled = true;
   next.textContent = "Sending...";
   try {
-    const response = await fetch(webhook, { method: "POST", body, signal: AbortSignal.timeout(10000) });
+    const response = await fetch(webhook, { method: "POST", body, signal: AbortSignal.timeout(20000) });
     if (!response.ok) throw new Error(`Webhook returned ${response.status}`);
+    // Make replies with the deal ID on line 1 and the SMS text, if the visitor opted in, after it.
+    const reply = await response.text();
+    if (!/^\d+/.test(reply)) throw new Error("Lead was not created");
+    const sms = reply.slice(reply.indexOf("\n") + 1).trim();
     finish("Request received.", "We'll be in touch within 24 hours.");
+    if (reply.includes("\n") && sms) {
+      done.querySelector(".sms-bubble").textContent = sms;
+      done.querySelector(".sms-phone").hidden = false;
+    }
   } catch {
     // Keep the answers on screen so the lead isn't lost.
     error.textContent = "We couldn't send your request. Please try again or call (480) 555-0142.";
