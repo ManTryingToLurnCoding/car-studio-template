@@ -238,7 +238,7 @@ fieldset.field { min-width: 0; }
   .header-cta .btn { display: none; }
   .hero { min-height: calc(100svh - 60px); }
   .hero > img { height: 50%; object-position: 46% 50%; }
-  .pills { grid-template-columns: 1fr 1fr; gap: 8px; padding-right: var(--pad); }
+  .pills { grid-template-columns: 1fr 1fr; gap: 8px; padding-right: 88px; } /* keeps Ceramic clear of the floating chat button */
   .pill { height: 56px; }
   .offers { grid-template-columns: 1fr; }
   .offers .tile { min-height: 400px; }

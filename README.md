@@ -20,6 +20,10 @@ A static demo website for car wrap, PPF and detailing studios. It uses plain HTM
 | `chat/` | Approved assistant knowledge, instructions and `saveLead` action |
 | `demo.html`, `demo.js` | Missed-call automation demo |
 | `check-api.js` | Checks the server validation and token rules |
+| `api/_guard.js` | Bot check, rate limits and duplicate blocking |
+| `vercel.json` | Browser security headers |
+| `protection.html` | Client-facing security summary |
+| `LAUNCH-CHECKLIST.md` | Reusable checklist for a real client launch |
 
 Run the checks before deploying:
 
@@ -39,9 +43,13 @@ AI chat: Botpress → `/api/chat-lead` on Vercel → Make → HubSpot under AI Q
 
 AI voice: ElevenAgents → `/api/voice-lead` on Vercel → Make → HubSpot under AI Qualified. The demo runs as a browser test call and is not connected to a real phone number.
 
-Server-only Vercel variables: `MAKE_WEBHOOK_URL`, `HUBSPOT_SERVICE_KEY`, `SMS_REF_SECRET`, `CHAT_LEAD_SECRET` and `VOICE_LEAD_SECRET`. Never put them in HTML, JavaScript or Git. The chat and voice secrets must also be stored in Botpress and ElevenLabs. For a new client, change `ORIGIN` in `api/events.js` and `api/messages.js`, and the lead URLs in both AI agents.
+Server-only Vercel variables: `MAKE_WEBHOOK_URL`, `HUBSPOT_SERVICE_KEY`, `SMS_REF_SECRET`, `CHAT_LEAD_SECRET`, `VOICE_LEAD_SECRET`, `GUARD_HASH_SECRET`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` and `TURNSTILE_SECRET_KEY`. Never put them in HTML, JavaScript or Git. The chat and voice secrets must also be stored in Botpress and ElevenLabs. For a new client, change `ORIGIN` in `api/events.js` and `api/messages.js`, `HOSTNAME` in `api/_guard.js`, and the lead URLs in both AI agents.
 
-Not added yet: Turnstile bot checks, rate limits and duplicate-lead rules. Add them before any real client goes live.
+## Protection
+
+The live demo includes server validation, a Turnstile bot check, rate limits, exact-repeat blocking and browser security headers. Only exact repeats are blocked. Any other repeat request is saved, and the team decides what to do with it.
+
+`protection.html` is the client-facing summary. Work through [LAUNCH-CHECKLIST.md](LAUNCH-CHECKLIST.md) before a real client goes live.
 
 ## After deploying
 
