@@ -79,3 +79,5 @@ async function handler(req, res) {
 
 module.exports = handler;
 module.exports.validate = validate;
+module.exports.clean = clean;
+module.exports.safeText = safeText;

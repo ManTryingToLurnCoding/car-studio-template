@@ -1,5 +1,6 @@
 README.md
 check.py
 check-api.js
+chat/
 .env*
 .vercel
