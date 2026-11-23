@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Automation Demo | Fil Rouge Atelier</title>
+  <meta name="description" content="Try the missed-call text-back demo for a fictional car wrap and paint protection studio.">
+  <!-- Demo business: keep it out of search. Remove this line only for a real client launch. -->
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://fil-rouge-atelier.vercel.app/demo.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Automation Demo","url":"https://fil-rouge-atelier.vercel.app/demo.html"}</script>
+</head>
+<body>
+
+<header class="header">
+  <p class="demo-note">Demo site. Fil Rouge Atelier is a fictional business. <a href="demo.html">Try the automation</a></p>
+  <div class="bar">
+    <a href="index.html" class="logo" aria-label="Fil Rouge Atelier home">FIL ROUGE</a>
+    <a href="index.html#quote" class="btn arrow">Get a quote</a>
+  </div>
+</header>
+
+<main class="demo-page pad">
+  <p class="eyebrow">Automation demo</p>
+  <h1 class="display">Never lose a missed call.</h1>
+  <p class="lead">Simulate a customer calling while the shop is busy. A real lead is created in the CRM, and the text-back appears below.</p>
+
+  <form class="demo-form" id="missed-call-form">
+    <div class="field">
+      <label for="phone">Caller's phone number *</label>
+      <input type="tel" id="phone" name="phone" required pattern="[0-9+\(\) .\-]{7,20}" title="Enter a valid phone number" autocomplete="off" placeholder="(480) 555-0199">
+    </div>
+    <button class="btn" type="submit">Simulate missed call</button>
+    <p class="form-error" role="alert"></p>
+  </form>
+
+  <div class="sms-phone" id="missed-call-sms" hidden>
+    <p class="eyebrow">Simulated SMS · no real text sent</p>
+    <p class="sms-bubble" role="status"></p>
+  </div>
+</main>
+
+<div class="callbar"><a href="tel:+14805550142">Call</a><a href="index.html#quote">Get a quote</a></div>
+<script src="demo.js" defer></script>
+</body>
+</html>

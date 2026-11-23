@@ -14,17 +14,27 @@ A static demo website for car wrap, PPF and detailing studios. It uses plain HTM
 | `check.py` | Checks links, metadata, schema and the sitemap |
 | `img/` | Demo photos |
 
-Run the check before deploying:
+| `api/events.js` | Server gateway: validates every request before it reaches Make |
+| `demo.html`, `demo.js` | Missed-call automation demo |
+| `check-api.js` | Checks the gateway's validation rules |
+
+Run the checks before deploying:
 
 ```powershell
 python check.py
 ```
 
-## Connect the quote form
+```powershell
+node check-api.js
+```
 
-Paste your Make.com webhook URL into `data-webhook` on `#quote-form` in `index.html`. While it is empty, the form says "Demo mode: nothing was sent."
+## How leads flow
 
-Leads are sent as form fields: `car`, `service`, `budget`, `preferred_time`, `name`, `phone`, `email` and `sms_consent`.
+Browser → `/api/events` on Vercel → Make → HubSpot.
+
+The Make webhook URL is a server-only Vercel variable named `MAKE_WEBHOOK_URL`. Never put it in HTML, JavaScript or Git. For a new client, also change `ORIGIN` in `api/events.js`.
+
+Not added yet: Turnstile bot checks, rate limits and duplicate-lead rules. Add them before any real client goes live.
 
 ## After deploying
 

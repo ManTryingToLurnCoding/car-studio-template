@@ -1,4 +1,5 @@
 README.md
 check.py
+check-api.js
 .env*
 .vercel

@@ -202,6 +202,12 @@ fieldset.field { min-width: 0; }
 .footer-row nav { display: flex; flex-wrap: wrap; gap: 24px; }
 
 .demo-note { padding: 4px var(--pad); background: var(--panel-2); color: #d8cabf; font-size: 12px; text-align: center; }
+.demo-note a { color: #fff; text-decoration: underline; }
+.demo-page { min-height: 100svh; display: grid; align-content: start; gap: 24px; padding-top: 150px; border-top: 0; }
+.demo-page .lead { max-width: 680px; color: #cdbdb1; }
+.demo-form { display: grid; gap: 16px; width: min(100%, 420px); }
+.demo-form .btn { min-height: 48px; justify-content: center; }
+.demo-form .btn:disabled { opacity: .65; cursor: wait; }
 .quick-answer { display: grid; gap: 12px; }
 .quick-answer .lead { max-width: 900px; }
 

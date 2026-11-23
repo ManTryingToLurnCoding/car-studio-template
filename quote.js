@@ -7,6 +7,7 @@ const back = form.querySelector("[data-back]");
 const next = form.querySelector("[data-next]");
 const error = form.querySelector(".form-error");
 const done = document.querySelector("#quote-done");
+const requestId = crypto.randomUUID(); // a retry of this form reuses it, so the server can spot duplicates
 let current = 0;
 
 form.noValidate = true; // each step is validated on its own, so hidden fields can't block it
@@ -41,34 +42,25 @@ function finish(title, text) {
 
 async function send() {
   const data = new FormData(form);
-  if (data.get("company")) return finish("Request received.", "We'll be in touch within 24 hours."); // honeypot: bots fill it
-
-  const webhook = form.dataset.webhook;
-  if (!webhook) return finish("Demo mode: nothing was sent.", "The form works, but it isn't connected to the CRM yet.");
-
-  const body = new URLSearchParams();
-  for (const key of new Set(data.keys())) {
-    if (key !== "company") body.set(key, data.getAll(key).join(", "));
-  }
+  const body = new URLSearchParams({ type: "quote", request_id: requestId });
+  for (const key of new Set(data.keys())) body.set(key, data.getAll(key).join(", "));
   body.set("sms_consent", data.has("sms_consent") ? "yes" : "no");
 
   next.disabled = true;
   next.textContent = "Sending...";
   try {
-    const response = await fetch(webhook, { method: "POST", body, signal: AbortSignal.timeout(20000) });
-    if (!response.ok) throw new Error(`Webhook returned ${response.status}`);
-    // Make replies with the deal ID on line 1 and the SMS text, if the visitor opted in, after it.
-    const reply = await response.text();
-    if (!/^\d+/.test(reply)) throw new Error("Lead was not created");
-    const sms = reply.slice(reply.indexOf("\n") + 1).trim();
+    const response = await fetch("/api/events", { method: "POST", body, signal: AbortSignal.timeout(20000) });
+    const reply = await response.json();
+    if (!response.ok || !reply.ok) throw new Error(reply.error);
     finish("Request received.", "We'll be in touch within 24 hours.");
-    if (reply.includes("\n") && sms) {
-      done.querySelector(".sms-bubble").textContent = sms;
+    if (reply.sms) {
+      done.querySelector(".sms-bubble").textContent = reply.sms;
       done.querySelector(".sms-phone").hidden = false;
     }
-  } catch {
+  } catch (err) {
     // Keep the answers on screen so the lead isn't lost.
-    error.textContent = "We couldn't send your request. Please try again or call (480) 555-0142.";
+    const detail = err.name === "Error" && err.message ? err.message : "We couldn't send your request.";
+    error.textContent = `${detail} Please try again or call (480) 555-0142.`;
     next.textContent = "Try again";
   } finally {
     next.disabled = false;
