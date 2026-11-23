@@ -13,10 +13,13 @@ A static demo website for car wrap, PPF and detailing studios. It uses plain HTM
 | `robots.txt`, `sitemap.xml`, `llms.txt` | Search and AI crawler files |
 | `check.py` | Checks links, metadata, schema and the sitemap |
 | `img/` | Demo photos |
-
 | `api/events.js` | Server gateway: validates every request before it reaches Make |
+| `api/messages.js`, `api/_token.js` | Reads one lead's latest simulated SMS through a signed, expiring reference |
+| `api/chat-lead.js` | Protected route for leads saved by the AI assistant |
+| `chat-widget.js` | Botpress chat widget |
+| `chat/` | Approved assistant knowledge, instructions and `saveLead` action |
 | `demo.html`, `demo.js` | Missed-call automation demo |
-| `check-api.js` | Checks the gateway's validation rules |
+| `check-api.js` | Checks the server validation and token rules |
 
 Run the checks before deploying:
 
@@ -32,7 +35,9 @@ node check-api.js
 
 Browser → `/api/events` on Vercel → Make → HubSpot.
 
-The Make webhook URL is a server-only Vercel variable named `MAKE_WEBHOOK_URL`. Never put it in HTML, JavaScript or Git. For a new client, also change `ORIGIN` in `api/events.js`.
+AI chat: Botpress → `/api/chat-lead` on Vercel → Make → HubSpot under AI Qualified.
+
+Server-only Vercel variables: `MAKE_WEBHOOK_URL`, `HUBSPOT_SERVICE_KEY`, `SMS_REF_SECRET` and `CHAT_LEAD_SECRET`. Never put them in HTML, JavaScript or Git. `CHAT_LEAD_SECRET` must also be set as a Botpress configuration variable. For a new client, change `ORIGIN` in `api/events.js` and `api/messages.js`, and the URL in the Botpress `saveLead` action.
 
 Not added yet: Turnstile bot checks, rate limits and duplicate-lead rules. Add them before any real client goes live.
 
