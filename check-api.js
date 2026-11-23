@@ -1,6 +1,8 @@
 // Gateway self-check: run `node check-api.js`.
 const assert = require("node:assert");
-const { validate } = require("./api/events.js");
+const fs = require("node:fs");
+process.chdir(__dirname);
+const { validate, START_PRICES } = require("./api/events.js");
 const { createRef, readRef } = require("./api/_token.js");
 const { validateAgentLead: validateChatLead, validSecret } = require("./api/_lead-route.js");
 const UUID_V4 = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -29,6 +31,19 @@ for (const bad of [
   { budget: "$1" },
   { preferred_time: "Midnight" },
 ]) assert.ok(validate({ ...quote, ...bad }).error, JSON.stringify(bad));
+
+const low = { ...quote, service: "Full front PPF", budget: "Under $1,000" };
+assert.ok(validate(low).error);
+assert.ok(validate({ ...quote, service: "Full front PPF, Color change wrap", budget: "$1,000-$3,000" }).error);
+assert.ok(validate({ ...quote, service: "Window tint", budget: "Under $1,000" }).data);
+assert.ok(validate({ ...quote, service: "Wheels or body kit", budget: "Under $1,000" }).data);
+assert.ok(validate({ ...quote, budget: "constructor" }).error);
+assert.ok(validateChatLead({ ...low, summary: "Budget is below the starting price; wants a follow-up." }).data);
+
+const html = fs.readFileSync("index.html", "utf8");
+for (const [service, price] of Object.entries(START_PRICES)) {
+  assert.ok(html.includes(`value="${service}" data-from="${price}"`), `index.html price for ${service}`);
+}
 
 const secret = "test-secret";
 const now = 1795000000000;

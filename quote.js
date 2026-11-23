@@ -32,6 +32,20 @@ function stepIsValid() {
   return [...step.querySelectorAll("input")].every((input) => input.reportValidity());
 }
 
+// Only offer budgets that can cover the combined starting price of the selected services.
+function updateBudgets() {
+  const startPrice = [...form.querySelectorAll('input[name="service"]:checked')].reduce((total, box) => total + Number(box.dataset.from), 0);
+  form.querySelectorAll('input[name="budget"]').forEach((radio) => {
+    const fits = Number(radio.dataset.max) >= startPrice;
+    radio.disabled = !fits;
+    radio.closest("label").hidden = !fits;
+    if (!fits) radio.checked = false;
+  });
+  form.querySelector(".budget-note").textContent = startPrice
+    ? `Your selection starts at $${startPrice.toLocaleString("en-US")}. The exact price is confirmed after inspection.`
+    : "Your selection is priced by quote after inspection.";
+}
+
 function finish(title, text) {
   form.hidden = true;
   done.querySelector("h3").textContent = title;
@@ -109,8 +123,11 @@ form.addEventListener("submit", (event) => {
   else send();
 });
 form.addEventListener("change", (event) => {
-  if (event.target.name === "service") event.target.form.querySelector('input[name="service"]').setCustomValidity("");
+  if (event.target.name !== "service") return;
+  form.querySelector('input[name="service"]').setCustomValidity("");
+  updateBudgets();
 });
 back.addEventListener("click", () => show(current - 1));
 
+updateBudgets(); // browsers can restore checked boxes after a refresh
 show(0, false);

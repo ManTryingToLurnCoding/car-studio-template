@@ -12,7 +12,7 @@ function validSecret(given, expected) {
 function validateAgentLead(body) {
   const summary = clean(body.summary);
   if (!safeText(summary, 500)) return { error: "Summary must be 2-500 characters without links." };
-  const { data, error } = validate({ ...body, type: "quote", request_id: crypto.randomUUID() });
+  const { data, error } = validate({ ...body, type: "quote", request_id: crypto.randomUUID() }, true);
   if (error) return { error };
   return { data: { ...data, summary, dealstage: "qualifiedtobuy" } }; // the stage is set here, never by the model
 }

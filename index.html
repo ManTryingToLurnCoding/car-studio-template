@@ -151,13 +151,13 @@
         <fieldset class="field full">
           <legend>Choose one or more *</legend>
           <div class="choices">
-            <label><input type="checkbox" name="service" value="Full-body PPF"><span>Full-body PPF</span></label>
-            <label><input type="checkbox" name="service" value="Full front PPF"><span>Full front PPF</span></label>
-            <label><input type="checkbox" name="service" value="Color change wrap"><span>Color change wrap</span></label>
-            <label><input type="checkbox" name="service" value="Ceramic coating"><span>Ceramic coating</span></label>
-            <label><input type="checkbox" name="service" value="Window tint"><span>Window tint</span></label>
-            <label><input type="checkbox" name="service" value="Chrome delete"><span>Chrome delete</span></label>
-            <label><input type="checkbox" name="service" value="Wheels or body kit"><span>Wheels or body kit</span></label>
+            <label><input type="checkbox" name="service" value="Full-body PPF" data-from="6000"><span>Full-body PPF</span></label>
+            <label><input type="checkbox" name="service" value="Full front PPF" data-from="1800"><span>Full front PPF</span></label>
+            <label><input type="checkbox" name="service" value="Color change wrap" data-from="3200"><span>Color change wrap</span></label>
+            <label><input type="checkbox" name="service" value="Ceramic coating" data-from="900"><span>Ceramic coating</span></label>
+            <label><input type="checkbox" name="service" value="Window tint" data-from="350"><span>Window tint</span></label>
+            <label><input type="checkbox" name="service" value="Chrome delete" data-from="450"><span>Chrome delete</span></label>
+            <label><input type="checkbox" name="service" value="Wheels or body kit" data-from="0"><span>Wheels or body kit</span></label>
           </div>
         </fieldset>
       </div>
@@ -166,11 +166,12 @@
         <h3 class="h3" tabindex="-1">Budget and timing</h3>
         <fieldset class="field full">
           <legend>Your budget *</legend>
+          <p class="budget-note" role="status"></p>
           <div class="choices">
-            <label><input type="radio" name="budget" value="Under $1,000" required><span>Under $1,000</span></label>
-            <label><input type="radio" name="budget" value="$1,000-$3,000"><span>$1,000 – $3,000</span></label>
-            <label><input type="radio" name="budget" value="$3,000-$6,000"><span>$3,000 – $6,000</span></label>
-            <label><input type="radio" name="budget" value="$6,000+"><span>$6,000+</span></label>
+            <label><input type="radio" name="budget" value="Under $1,000" data-max="999" required><span>Under $1,000</span></label>
+            <label><input type="radio" name="budget" value="$1,000-$3,000" data-max="3000" required><span>$1,000 – $3,000</span></label>
+            <label><input type="radio" name="budget" value="$3,000-$6,000" data-max="6000" required><span>$3,000 – $6,000</span></label>
+            <label><input type="radio" name="budget" value="$6,000+" data-max="999999" required><span>$6,000+</span></label>
           </div>
         </fieldset>
         <fieldset class="field full">

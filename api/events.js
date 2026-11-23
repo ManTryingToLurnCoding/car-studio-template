@@ -3,7 +3,9 @@ const { createRef } = require("./_token.js");
 
 const ORIGIN = "https://fil-rouge-atelier.vercel.app";
 const SERVICES = new Set(["Full-body PPF", "Full front PPF", "Color change wrap", "Ceramic coating", "Window tint", "Chrome delete", "Wheels or body kit"]);
-const BUDGETS = new Set(["Under $1,000", "$1,000-$3,000", "$3,000-$6,000", "$6,000+"]);
+const BUDGET_MAX = { "Under $1,000": 999, "$1,000-$3,000": 3000, "$3,000-$6,000": 6000, "$6,000+": Infinity };
+// Keep in sync with data-from in index.html. Quote-only services start at 0.
+const START_PRICES = { "Full-body PPF": 6000, "Full front PPF": 1800, "Color change wrap": 3200, "Ceramic coating": 900, "Window tint": 350, "Chrome delete": 450, "Wheels or body kit": 0 };
 const TIMES = new Set(["Flexible", "Weekday morning", "Weekday afternoon"]);
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
@@ -13,7 +15,8 @@ const safeText = (value, max) => value.length >= 2 && value.length <= max && !/[
 const validPhone = (value) => /^[0-9+() .-]{7,20}$/.test(value) && (value.match(/\d/g) || []).length >= 7 && (value.match(/\d/g) || []).length <= 15;
 const validEmail = (value) => value.length <= 120 && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
 
-function validate(body) {
+// AI agents may save a low budget after the customer asks for a shop follow-up; the form may not.
+function validate(body, allowLowBudget = false) {
   const type = clean(body.type);
   const request_id = clean(body.request_id);
   const phone = clean(body.phone);
@@ -32,7 +35,9 @@ function validate(body) {
   if (!safeText(car, 80)) return { error: "Please enter your car without links." };
   if (email && !validEmail(email)) return { error: "Please enter a valid email." };
   if (!services.length || !services.every((item) => SERVICES.has(item))) return { error: "Please choose a valid service." };
-  if (!BUDGETS.has(budget)) return { error: "Please choose a valid budget." };
+  if (!Object.hasOwn(BUDGET_MAX, budget)) return { error: "Please choose a valid budget." };
+  const startPrice = services.reduce((total, item) => total + START_PRICES[item], 0);
+  if (!allowLowBudget && BUDGET_MAX[budget] < startPrice) return { error: "That budget is below the starting price for your selection." };
   if (!TIMES.has(preferred_time)) return { error: "Please choose a valid time." };
   return { data: { type, request_id, name, phone, car, email, service: services.join(", "), budget, preferred_time, sms_consent: clean(body.sms_consent) === "yes" ? "yes" : "no" } };
 }
@@ -79,5 +84,6 @@ async function handler(req, res) {
 
 module.exports = handler;
 module.exports.validate = validate;
+module.exports.START_PRICES = START_PRICES;
 module.exports.clean = clean;
 module.exports.safeText = safeText;

@@ -162,6 +162,7 @@ fieldset.field { min-width: 0; }
 .consent { display: flex; gap: 10px; align-items: flex-start; text-transform: none; letter-spacing: 0; font-size: 13px; line-height: 1.45; }
 .consent input { width: 20px; height: 20px; flex: none; accent-color: var(--accent); }
 .trap { position: absolute; left: -9999px; }
+.budget-note { color: var(--muted); font-size: 14px; }
 .form-error { color: #ff6a60; font-size: 14px; }
 .form-error:empty { display: none; }
 .form-nav { display: flex; justify-content: space-between; gap: 12px; }
@@ -244,6 +245,7 @@ fieldset.field { min-width: 0; }
   .offers .tile + .tile { border-left: 0; border-top: 1px solid var(--line); }
   .prices, .form { grid-template-columns: 1fr; }
   .step { grid-template-columns: 1fr; min-height: 0; }
+  .form-nav { padding-right: 72px; } /* keeps Continue clear of the floating chat button */
   .form-nav .btn { flex: 1; }
   input[type=text], input[type=email], input[type=tel] { font-size: 16px; }
   .cards { grid-template-columns: 1fr 1fr; }
