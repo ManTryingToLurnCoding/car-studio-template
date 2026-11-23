@@ -90,6 +90,10 @@ function watchSms(ref, latest) {
 
 async function send() {
   const data = new FormData(form);
+  if (!data.get("cf-turnstile-response")) {
+    error.textContent = "The security check is still loading. Please try again in a moment.";
+    return;
+  }
   const body = new URLSearchParams({ type: "quote", request_id: requestId });
   for (const key of new Set(data.keys())) body.set(key, data.getAll(key).join(", "));
   body.set("sms_consent", data.has("sms_consent") ? "yes" : "no");
@@ -111,6 +115,7 @@ async function send() {
     const detail = err.name === "Error" && err.message ? err.message : "We couldn't send your request.";
     error.textContent = `${detail} Please try again or call (480) 555-0142.`;
     next.textContent = "Try again";
+    window.turnstile?.reset(); // tokens are single-use
   } finally {
     next.disabled = false;
   }

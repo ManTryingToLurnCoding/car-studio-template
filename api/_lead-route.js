@@ -1,6 +1,7 @@
 // Shared server-to-server lead route for AI agents. Their input is untrusted, so it gets the same validation as the form.
 const crypto = require("node:crypto");
 const { clean, safeText, validate } = require("./events.js");
+const { guardLead } = require("./_guard.js");
 
 function validSecret(given, expected) {
   if (typeof given !== "string" || !expected) return false;
@@ -47,6 +48,10 @@ function createLeadRoute(secretName, headerName) {
       return res.status(503).json({ ok: false, error: "Service unavailable." });
     }
 
+    const guard = await guardLead(data, null); // agent requests share the provider's IP, so limit by phone and overall
+    if (guard.status === "duplicate") return res.status(200).json({ ok: true, duplicate: true });
+    if (guard.status === "limited") return res.status(429).json({ ok: false, error: "Too many requests right now." });
+
     try {
       const response = await fetch(process.env.MAKE_WEBHOOK_URL, { method: "POST", body: new URLSearchParams(data), signal: AbortSignal.timeout(15000) });
       const reply = await response.text();
@@ -54,6 +59,7 @@ function createLeadRoute(secretName, headerName) {
       return res.status(200).json({ ok: true });
     } catch (err) {
       console.error("Agent lead failed:", err.message); // never log the lead's details
+      await guard.release();
       return res.status(502).json({ ok: false, error: "The lead could not be saved." });
     }
   };

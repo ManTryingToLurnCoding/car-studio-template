@@ -34,6 +34,7 @@
       <label for="phone">Caller's phone number *</label>
       <input type="tel" id="phone" name="phone" required pattern="[0-9+\(\) .\-]{7,20}" title="Enter a valid phone number" autocomplete="off" placeholder="(480) 555-0199">
     </div>
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAAGOlK2OTobtq5_5o" data-appearance="interaction-only" data-refresh-expired="auto" data-theme="dark"></div>
     <button class="btn" type="submit">Simulate missed call</button>
     <p class="form-error" role="alert"></p>
   </form>
@@ -45,6 +46,7 @@
 </main>
 
 <div class="callbar"><a href="tel:+14805550142">Call</a><a href="index.html#quote">Get a quote</a></div>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script src="demo.js" defer></script>
 <script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js" defer></script>
 <script src="chat-widget.js" defer></script>

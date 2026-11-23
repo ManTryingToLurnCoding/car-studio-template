@@ -1,5 +1,8 @@
 // Gateway: the only route from the browser to the automation. The Make URL stays in a server env var.
 const { createRef } = require("./_token.js");
+const { clientIp, guardLead, verifyTurnstile } = require("./_guard.js");
+
+const MISSED_CALL_SMS = "Sorry we missed your call at Fil Rouge Atelier. How can we help? Reply with your car and the service you need. Reply STOP to opt out.";
 
 const ORIGIN = "https://fil-rouge-atelier.vercel.app";
 const SERVICES = new Set(["Full-body PPF", "Full front PPF", "Color change wrap", "Ceramic coating", "Window tint", "Chrome delete", "Wheels or body kit"]);
@@ -69,6 +72,16 @@ async function handler(req, res) {
     return res.status(503).json({ ok: false, error: "Service unavailable." });
   }
 
+  const ip = clientIp(req);
+  if (!(await verifyTurnstile(body["cf-turnstile-response"], ip))) {
+    return res.status(403).json({ ok: false, error: "Please complete the security check." });
+  }
+  const guard = await guardLead(data, ip);
+  if (guard.status === "duplicate") {
+    return res.status(200).json({ ok: true, duplicate: true, sms: data.type === "missed_call" ? MISSED_CALL_SMS : "" });
+  }
+  if (guard.status === "limited") return res.status(429).json({ ok: false, error: "Too many requests right now." });
+
   try {
     const response = await fetch(process.env.MAKE_WEBHOOK_URL, { method: "POST", body: new URLSearchParams(data), signal: AbortSignal.timeout(15000) });
     const reply = await response.text();
@@ -78,6 +91,7 @@ async function handler(req, res) {
     return res.status(200).json({ ok: true, sms, ...(canWatch ? { ref: createRef(reply.split("\n")[0], process.env.SMS_REF_SECRET) } : {}) });
   } catch (err) {
     console.error("Automation failed:", err.message); // never log the lead's details
+    await guard.release(); // a failed lead must be retryable, not treated as a duplicate
     return res.status(502).json({ ok: false, error: "We couldn't send your request." });
   }
 }

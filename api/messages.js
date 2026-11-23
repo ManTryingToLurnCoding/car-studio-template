@@ -1,5 +1,6 @@
 // Returns the latest simulated SMS for the lead named by a signed reference.
 const { readRef } = require("./_token.js");
+const { clientIp, isPollLimited } = require("./_guard.js");
 
 const ORIGIN = "https://fil-rouge-atelier.vercel.app";
 
@@ -22,6 +23,7 @@ module.exports = async function handler(req, res) {
   }
   const dealId = readRef(body && body.ref, process.env.SMS_REF_SECRET);
   if (!dealId) return res.status(403).json({ ok: false, error: "Request blocked." });
+  if (await isPollLimited(clientIp(req))) return res.status(429).json({ ok: false, error: "Too many requests." });
   if (!process.env.HUBSPOT_SERVICE_KEY) {
     console.error("HUBSPOT_SERVICE_KEY is not set");
     return res.status(503).json({ ok: false, error: "Service unavailable." });
