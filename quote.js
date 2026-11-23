@@ -1,4 +1,4 @@
-// Multi-step quote form. Set data-webhook on the form to send leads to the CRM automation.
+// Multi-step quote form. Leads go through the /api/events gateway.
 const form = document.querySelector("#quote-form");
 const steps = [...form.querySelectorAll(".step")];
 const progress = form.querySelector("progress");
@@ -40,6 +40,40 @@ function finish(title, text) {
   done.querySelector("h3").focus();
 }
 
+// Checks only while this tab is visible, and immediately when the viewer returns from the CRM.
+function watchSms(ref, latest) {
+  const stopAt = Date.now() + 25 * 60 * 1000;
+  let busy = false;
+  let timer;
+  const stop = () => {
+    clearInterval(timer);
+    document.removeEventListener("visibilitychange", check);
+  };
+  async function check() {
+    if (document.hidden || busy) return;
+    if (Date.now() > stopAt) return stop();
+    busy = true;
+    try {
+      const response = await fetch("/api/messages", { method: "POST", body: new URLSearchParams({ ref }), signal: AbortSignal.timeout(9000) });
+      if (response.status === 403 || response.status === 503) return stop();
+      const reply = await response.json();
+      if (reply.ok && reply.sms && reply.sms !== latest) {
+        latest = reply.sms;
+        const bubble = document.createElement("p");
+        bubble.className = "sms-bubble";
+        bubble.textContent = latest;
+        done.querySelector(".sms-phone").append(bubble);
+      }
+    } catch {
+      // A missed check is harmless; the next one retries.
+    } finally {
+      busy = false;
+    }
+  }
+  timer = setInterval(check, 4000);
+  document.addEventListener("visibilitychange", check);
+}
+
 async function send() {
   const data = new FormData(form);
   const body = new URLSearchParams({ type: "quote", request_id: requestId });
@@ -56,6 +90,7 @@ async function send() {
     if (reply.sms) {
       done.querySelector(".sms-bubble").textContent = reply.sms;
       done.querySelector(".sms-phone").hidden = false;
+      if (reply.ref) watchSms(reply.ref, reply.sms);
     }
   } catch (err) {
     // Keep the answers on screen so the lead isn't lost.

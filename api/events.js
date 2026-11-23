@@ -1,4 +1,6 @@
 // Gateway: the only route from the browser to the automation. The Make URL stays in a server env var.
+const { createRef } = require("./_token.js");
+
 const ORIGIN = "https://fil-rouge-atelier.vercel.app";
 const SERVICES = new Set(["Full-body PPF", "Full front PPF", "Color change wrap", "Ceramic coating", "Window tint", "Chrome delete", "Wheels or body kit"]);
 const BUDGETS = new Set(["Under $1,000", "$1,000-$3,000", "$3,000-$6,000", "$6,000+"]);
@@ -66,7 +68,9 @@ async function handler(req, res) {
     const response = await fetch(process.env.MAKE_WEBHOOK_URL, { method: "POST", body: new URLSearchParams(data), signal: AbortSignal.timeout(15000) });
     const reply = await response.text();
     if (!response.ok || !/^\d+(\n|$)/.test(reply)) throw new Error(`Automation returned ${response.status}`);
-    return res.status(200).json({ ok: true, sms: reply.includes("\n") ? reply.slice(reply.indexOf("\n") + 1).trim() : "" });
+    const sms = reply.includes("\n") ? reply.slice(reply.indexOf("\n") + 1).trim() : "";
+    const canWatch = data.type === "quote" && data.sms_consent === "yes" && process.env.SMS_REF_SECRET;
+    return res.status(200).json({ ok: true, sms, ...(canWatch ? { ref: createRef(reply.split("\n")[0], process.env.SMS_REF_SECRET) } : {}) });
   } catch (err) {
     console.error("Automation failed:", err.message); // never log the lead's details
     return res.status(502).json({ ok: false, error: "We couldn't send your request." });
