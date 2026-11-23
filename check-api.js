@@ -2,7 +2,7 @@
 const assert = require("node:assert");
 const { validate } = require("./api/events.js");
 const { createRef, readRef } = require("./api/_token.js");
-const { validateChatLead, validSecret } = require("./api/chat-lead.js");
+const { validateAgentLead: validateChatLead, validSecret } = require("./api/_lead-route.js");
 const UUID_V4 = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 const request_id = "3f2b8c1e-7a4d-4e9b-8c21-5d6f7a8b9c0d";
