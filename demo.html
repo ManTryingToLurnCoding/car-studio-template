@@ -43,12 +43,28 @@
     <p class="eyebrow">Simulated SMS · no real text sent</p>
     <p class="sms-bubble" role="status"></p>
   </div>
+
+  <section class="voice-demo" id="voice" aria-labelledby="voice-title">
+    <p class="eyebrow">AI voice receptionist</p>
+    <h2 class="h2" id="voice-title">Call the shop from your browser.</h2>
+    <p class="lead">Ask about a service or request a quote. When your request is saved, a simulated confirmation text appears below.</p>
+    <button class="btn" type="button" id="voice-call">Talk to the AI receptionist</button>
+    <p class="muted" id="voice-status" role="status"></p>
+    <p class="form-error" id="voice-error" role="alert"></p>
+    <p class="muted voice-note">Uses your microphone. No phone number is involved. Your voice is processed by ElevenLabs, so please use sample details.</p>
+    <div class="sms-phone" id="voice-sms" hidden>
+      <p class="eyebrow">Simulated SMS · no real text sent</p>
+      <p class="sms-bubble" role="status"></p>
+    </div>
+  </section>
+
   <p class="muted"><a class="maplink" href="protection.html">How this system is protected</a></p>
 </main>
 
 <div class="callbar"><a href="tel:+14805550142">Call</a><a href="index.html#quote">Get a quote</a></div>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script src="demo.js" defer></script>
+<script src="voice.js" defer></script>
 <script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js" defer></script>
 <script src="chat-widget.js" defer></script>
 </body>

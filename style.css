@@ -209,6 +209,11 @@ fieldset.field { min-width: 0; }
 .demo-form { display: grid; gap: 16px; width: min(100%, 420px); }
 .demo-form .btn { min-height: 48px; justify-content: center; }
 .demo-form .btn:disabled { opacity: .65; cursor: wait; }
+.voice-demo { display: grid; justify-items: start; gap: 16px; padding-top: 32px; border-top: 1px solid var(--line); }
+.voice-demo .btn { min-width: 220px; min-height: 48px; justify-content: center; }
+.voice-demo .btn:disabled { opacity: .65; cursor: wait; }
+.voice-demo #voice-status:empty, .voice-demo #voice-error:empty { display: none; }
+.voice-note { max-width: 560px; font-size: 13px; }
 .quick-answer { display: grid; gap: 12px; }
 .quick-answer .lead { max-width: 900px; }
 
