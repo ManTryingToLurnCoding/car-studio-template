@@ -1,5 +1,5 @@
 // Browser call to the ElevenLabs agent. The agent ID is public; the lead secret stays in ElevenLabs and Vercel.
-const AGENT_ID = "agent_3301m83spmhzeba9mk5t6j6k60ea";
+const AGENT_ID = "agent_7701m86mj3xbeqkss115gzhjfzsg";
 const CLIENT = "vendor/elevenlabs/client-1.38.0.js";
 const SAVED_SMS = "Thanks for calling Fil Rouge Atelier. Your request is in, and the shop will follow up to confirm the details. Reply STOP to opt out.";
 
